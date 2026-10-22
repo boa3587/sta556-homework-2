@@ -17,16 +17,39 @@ disease risk factors among rural blacks: a community-based study. Southern Medic
 **Data:** `diabetes.csv` is included in `data/`. The original file can also be downloaded
 from the Kaggle page above (free account required).
 
-## How to Run
-1. `pip install -r requirements.txt`
-2. Confirm `diabetes.csv` is in `data/`
-3. Open `notebooks/analysis.ipynb` from the `notebooks/` folder and run all cells
-
 ## Project Structure
-- `data/`: raw data
-- `src/`: reusable functions (`data_loader.py`, `cleaning.py`)
-- `notebooks/`: the analysis notebook
-- `figures/`: saved plots
+```
+sta556-homework-2/
+├── data/
+│   └── diabetes.csv          # raw dataset (403 rows, 19 columns), not modified
+├── src/
+│   ├── data_loader.py        # function that reads diabetes.csv into a pandas DataFrame
+│   └── cleaning.py           # reusable cleaning functions: drops rows missing glyhb, age
+│                             #   or weight, removes the mostly empty second blood pressure
+│                             #   columns, and creates the diabetes indicator (glyhb >= 6.5)
+├── notebooks/
+│   └── analysis.ipynb        # main analysis: loads and cleans the data using src/,
+│                             #   summarizes it, and produces the figures
+├── figures/                  # plots saved by the notebook (e.g. fig3_glyhb_vs_glucose.png)
+├── requirements.txt
+└── README.md
+```
+
+The notebook depends on the other folders. It imports its functions from `src/`, reads the
+data from `data/`, and writes its plots to `figures/`. Keep this folder structure as it is,
+or the notebook will not find its files.
+
+## How to Run
+1. **Get the whole repository, not just the notebook.
+   Downloading only `analysis.ipynb` will fail, because `src/` and `data/` will be missing.
+2. **Open the top-level `sta556-homework-2` folder** in VS Code (**File → Open Folder**)
+   or in Jupyter, not the `notebooks/` folder by itself.
+3. **Check that `data/diabetes.csv` is present.**
+4. **Open `notebooks/analysis.ipynb`**, select your Python kernel, and **run all cells
+   from top to bottom** (**Run All**). The cells depend on earlier ones, so run them in
+   order.
+5. **Check the outputs.** The results tables appear in the notebook, and the plots are
+   saved to `figures/`.
 
 ## Cleaning Notes
 Diabetes is defined as glycosylated hemoglobin (`glyhb`) of 6.5% or higher, the standard
